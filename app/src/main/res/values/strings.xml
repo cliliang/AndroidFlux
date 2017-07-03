@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">AndroidFlux</string>
+
+    <string name="square_tag">广场</string>
+    <string name="paier_tag">拍客</string>
+    <string name="find_tag">发现</string>
+    <string name="publish_tag">发布</string>
+    <string name="my_tag">我的</string>
+</resources>

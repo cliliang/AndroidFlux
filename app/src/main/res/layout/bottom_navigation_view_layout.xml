@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/bottom_navigation_group"
+    android:orientation="horizontal"
+    android:background="@drawable/main_bottom_navigation_bg"
+    android:paddingBottom="4dp"
+    android:paddingTop="5dp">
+
+    <RadioButton
+        android:id="@+id/bottom_navigation_tab1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:button="@null"
+        android:checked="true"
+        android:drawablePadding="4dp"
+        android:drawableTop="@drawable/tab_square_selector"
+        android:gravity="center_horizontal"
+        android:textSize="@dimen/text_size_10"
+        android:textColor="@color/main_tab_text_selector"
+        android:text="@string/square_tag" />
+
+    <RadioButton
+        android:id="@+id/bottom_navigation_tab2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:button="@null"
+        android:drawablePadding="4dp"
+        android:drawableTop="@drawable/tab_paier_selector"
+        android:textSize="@dimen/text_size_10"
+        android:textColor="@color/main_tab_text_selector"
+        android:gravity="center_horizontal"
+        android:text="@string/paier_tag" />
+
+    <RadioButton
+        android:id="@+id/bottom_navigation_tab4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:button="@null"
+        android:drawablePadding="4dp"
+        android:drawableTop="@drawable/tab_find_selector"
+        android:gravity="center_horizontal"
+        android:textSize="@dimen/text_size_10"
+        android:textColor="@color/main_tab_text_selector"
+        android:text="@string/find_tag" />
+
+    <RadioButton
+        android:id="@+id/bottom_navigation_tab5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:button="@null"
+        android:drawablePadding="4dp"
+        android:textSize="@dimen/text_size_10"
+        android:textColor="@color/main_tab_text_selector"
+        android:drawableTop="@drawable/tab_my_selector"
+        android:gravity="center_horizontal"
+        android:text="@string/my_tag" />
+
+
+</RadioGroup>

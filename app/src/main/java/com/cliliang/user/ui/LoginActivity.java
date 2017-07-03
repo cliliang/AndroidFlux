@@ -19,6 +19,7 @@ public class LoginActivity extends BaseToolBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
+        setTitle("登录");
         findViewById(R.id.register_activity_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

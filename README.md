@@ -27,10 +27,10 @@ UserRouter.getInstance(LoginActivity.this).showActivity(UserUI.RegisterActivity)
 ```
 
 ## 状态栏
-首页状态栏透明，功能界面状态栏颜色与主色调相一至
+首页状态栏透明，功能界面状态栏颜色与主色调相一致
 
 ## Toolbar
 自定义的Toolbar
 
-##首页
+## 首页
 首页底部有四个导航按钮

@@ -12,5 +12,4 @@ public class UserUI {
     private static final int MAIN = ModuleID.USER_MODULE_ID;
     public static final int LoginActivity = MAIN + 1;
     public static final int RegisterActivity = MAIN + 2;
-    public static final int OutActivity = MAIN + 3;
 }

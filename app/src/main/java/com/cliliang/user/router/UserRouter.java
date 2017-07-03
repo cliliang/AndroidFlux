@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.cliliang.app.router.BaseRouter;
 import com.cliliang.user.ui.LoginActivity;
-import com.cliliang.user.ui.OutActivity;
 import com.cliliang.user.ui.RegisterActivity;
 
 /**
@@ -19,7 +18,6 @@ public class UserRouter extends BaseRouter {
         super(context);
         maps.put(UserUI.LoginActivity, LoginActivity.class);
         maps.put(UserUI.RegisterActivity, RegisterActivity.class);
-        maps.put(UserUI.OutActivity, OutActivity.class);
     }
 
     public static UserRouter getInstance(Context cnt) {

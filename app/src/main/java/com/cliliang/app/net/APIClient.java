@@ -19,11 +19,11 @@ public class APIClient {
     private static final String HTTPS = "https://";
 
     protected static String getRequestType() {
-        return HTTPS;
+        return HTTP;
     }
 
-    protected static final String DEBUG_HOST_BASE = "";
-    protected static final String RELEASE_HOST_BASE = "";
+    protected static final String DEBUG_HOST_BASE = "gc.ditu.aliyun.com/";
+    protected static final String RELEASE_HOST_BASE = "gc.ditu.aliyun.com/";
 
     private static final String debugBaseHost = getRequestType() + DEBUG_HOST_BASE;
     private static final String releaseBaseHost = getRequestType() + RELEASE_HOST_BASE;
@@ -53,6 +53,9 @@ public class APIClient {
         }
         return apiService;
     }
+
+    public static final String getLocation = "geocoding?";
+
 
     private static String getURL() {
         return AppConfig.isDebugVersion ? debugBaseHost : releaseBaseHost;

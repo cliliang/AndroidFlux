@@ -8,13 +8,14 @@ import android.view.Window;
 
 import com.cliliang.app.AppContext;
 import com.cliliang.app.flux.AppActionsCreator;
+import com.cliliang.app.flux.Dispatcher;
 
 
 public class BaseActivity extends AppCompatActivity {
 
     protected AppActionsCreator appActionsCreator;
     protected AppContext appContext;
-
+    public Dispatcher dispatcher;
     protected ProgressDialog mProgressDialog;
 
     public ProgressDialog showProgress(String title, String message) {
@@ -53,6 +54,7 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     protected void initDependencies(){
+        dispatcher = Dispatcher.getInstance();
         appActionsCreator = AppActionsCreator.getInstance();
     }
 

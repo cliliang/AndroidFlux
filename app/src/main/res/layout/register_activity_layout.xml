@@ -7,5 +7,9 @@
         android:id="@+id/out_activity_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TO_Out_Activity"/>
+        android:text="获取数据"/>
+    <TextView
+        android:id="@+id/out_activity_display_info"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>

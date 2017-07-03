@@ -28,6 +28,10 @@
         <activity android:name=".user.ui.OutActivity"
             android:theme="@style/CommonTheme"
             android:screenOrientation="portrait"/>
+
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="${UMENG_CHANNEL_VALUE}" />
     </application>
 
 </manifest>

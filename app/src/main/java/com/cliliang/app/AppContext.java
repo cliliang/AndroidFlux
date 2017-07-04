@@ -1,8 +1,10 @@
 package com.cliliang.app;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.cliliang.app.module.BaseModule;
+import com.cliliang.app.ui.CrashHandler;
 import com.cliliang.home.HomeModule;
 import com.cliliang.user.UserModule;
 
@@ -26,6 +28,8 @@ public class AppContext extends Application {
         super.onCreate();
         fillMods();
         instance = this;
+        CrashHandler crashHandler = CrashHandler.getInstance();
+        Thread.setDefaultUncaughtExceptionHandler(crashHandler);
     }
 
     //App增加模块时，都要在这里注册

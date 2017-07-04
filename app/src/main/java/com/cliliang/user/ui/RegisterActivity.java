@@ -1,6 +1,7 @@
 package com.cliliang.user.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -13,6 +14,7 @@ import com.cliliang.user.stores.LocationStore;
 import com.squareup.otto.Subscribe;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -58,6 +60,7 @@ public class RegisterActivity extends BaseToolBarActivity {
     protected void onResume() {
         super.onResume();
         store.register(this);
+
     }
 
     @Override
@@ -77,7 +80,7 @@ public class RegisterActivity extends BaseToolBarActivity {
         String type = event.getType();
         switch (type){
             case LocationAction.ACTION_REQUEST_START:
-                showProgress("", "请求数据");
+                showProgress("请求数据");
                 break;
             case LocationAction.ACTION_REQUEST_FINISH:
                 hideProgress();

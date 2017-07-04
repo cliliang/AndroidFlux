@@ -1,5 +1,6 @@
 package com.cliliang.app.ui;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,19 +11,25 @@ import com.cliliang.app.AppContext;
 import com.cliliang.app.flux.AppActionsCreator;
 import com.cliliang.app.flux.Dispatcher;
 
+import java.lang.ref.WeakReference;
+
 
 public class BaseActivity extends AppCompatActivity {
 
     protected AppActionsCreator appActionsCreator;
     protected AppContext appContext;
-    public Dispatcher dispatcher;
+    protected Dispatcher dispatcher;
     protected ProgressDialog mProgressDialog;
 
-    public ProgressDialog showProgress(String title, String message) {
+    protected ProgressDialog showProgress(String title, String message) {
         return showProgress(title, message, -1);
     }
 
-    public ProgressDialog showProgress(String title, String message, int theme) {
+    protected ProgressDialog showProgress(String message) {
+        return showProgress("", message, -1);
+    }
+
+    protected ProgressDialog showProgress(String title, String message, int theme) {
         if (mProgressDialog == null) {
             if (theme > 0)
                 mProgressDialog = new ProgressDialog(this, theme);
@@ -41,15 +48,15 @@ public class BaseActivity extends AppCompatActivity {
         return mProgressDialog;
     }
 
-    public void hideProgress() {
-        if (mProgressDialog != null) {
+    protected void hideProgress() {
+        if (mProgressDialog != null && !this.isFinishing()) {
             mProgressDialog.dismiss();
         }
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AppManager.getAppManager().addActivity(this);
+        AppManager.getInstance().addActivity(new WeakReference<Activity>(this));
         appContext = (AppContext) getApplicationContext();
     }
 
@@ -70,9 +77,10 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        AppManager.getInstance().removeActivity(new WeakReference<Activity>(this));
     }
 
-    public int getStatusBarHeight(){
+    protected int getStatusBarHeight(){
         int result = 0;
         int resId = getResources().getIdentifier("status_bar_height","dimen","android");
         if(resId>0){

@@ -8,95 +8,63 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 
+import java.lang.ref.WeakReference;
 import java.util.Stack;
 
 public class AppManager {
 
-    private static Stack<Activity> activityStack;
-    private static AppManager instance;
-    private AppManager() {}
+    private static Stack<WeakReference<Activity>> activityStack;
+    private AppManager() {
+        activityStack = new Stack<>();
+    }
 
-    /**
-     * 单一实例
-     */
-    public static AppManager getAppManager() {
-        if (instance == null) {
-            instance = new AppManager();
-        }
-        return instance;
+    private static class AppManagerHolder{
+        private static final AppManager instance = new AppManager();
+    }
+
+    public static AppManager getInstance(){
+        return AppManagerHolder.instance;
     }
 
     /**
      * 添加Activity到堆栈
      */
-    public void addActivity(Activity activity) {
-        if (activityStack == null) {
-            activityStack = new Stack<>();
-        }
+    public void addActivity(WeakReference<Activity> activity) {
         activityStack.add(activity);
-    }
-
-    /**
-     * 获取当前Activity（堆栈中最后一个压入的）
-     */
-    public Activity getTopElement() {
-        Activity activity = activityStack.lastElement();
-        return activity;
-    }
-
-    /**
-     * 结束当前Activity（堆栈中最后一个压入的）
-     */
-    public void finishElement() {
-        Activity activity = activityStack.lastElement();
-        finishActivity(activity);
     }
 
     /**
      * 结束指定的Activity
      */
-    public void finishActivity(Activity activity) {
+    public void removeActivity(WeakReference<Activity> activity) {
         if (activity != null) {
             activityStack.remove(activity);
-            activity.finish();
         }
     }
+
+    /**
+     * 获取当前Activity（堆栈中最后一个压入的）
+     */
+    public Activity getTopActivity() {
+        Activity activity = activityStack.lastElement().get();
+        if (activity == null){
+            return null;
+        }else {
+            return activity;
+        }
+    }
+
+
 
     /**
      * 结束指定类名的Activity
      */
     public void finishActivity(Class<?> cls) {
-        int length = activityStack.size();
-        for (int i = 0;i < length; i++){
-            Activity activity = activityStack.get(i);
-            if (activity.getClass().equals(cls)){
-                finishActivity(activity);
-                i--;
-                length--;
-            }
-        }
-    }
-
-    public void PopToActivity(Class<?> cls) {
-        boolean bFind = false;
-        for (Activity activity : activityStack) {
-            if (activity.getClass().equals(cls)) {
-               bFind = true;
-               break;
-            }
-        }
-
-        if (bFind) {
-            for (int i = 0, size = activityStack.size(); i < size; i++) {
-                Activity act = activityStack.peek();
-                if (null != act) {
-                    if (!act.getClass().equals(cls)) {
-                        activityStack.pop();
-                        act.finish();
-                    } else {
-                        break;
-                    }
-                }
+        for (WeakReference<Activity> weakReference : activityStack) {
+            Activity activity = weakReference.get();
+            if (activity != null && activity.getClass().equals(cls)) {
+                activityStack.remove(weakReference);
+                activity.finish();
             }
         }
     }
@@ -105,8 +73,8 @@ public class AppManager {
      * 结束所有Activity
      */
     public void finishAllActivity() {
-        for (int i = 0, size = activityStack.size(); i < size; i++) {
-            Activity act = activityStack.pop();
+        for (int i = 0; i < activityStack.size(); i++) {
+            Activity act = activityStack.pop().get();
             if (null != act) {
                 act.finish();
             }
@@ -114,35 +82,16 @@ public class AppManager {
         activityStack.clear();
     }
 
-
     /**
      * 退出应用程序
      */
     public void appExit() {
         try {
             finishAllActivity();
-        } catch (Exception e) {
-        }
-    }
-
-    /**
-     * 退出应用程序
-     */
-    public void appTerminate(Context context) {
-        try {
-            finishAllActivity();
-            ActivityManager activityMgr = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-            activityMgr.killBackgroundProcesses(context.getPackageName());
-            System.exit(0);
+            android.os.Process.killProcess(android.os.Process.myPid());
+            System.exit(1);
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public int getActivityCount() {
-        if (activityStack == null) {
-            return 0;
-        }
-        return activityStack.size();
     }
 }

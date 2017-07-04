@@ -70,7 +70,7 @@ public class BaseToolBarActivity extends BaseActivity {
     }
 
     public void onBackClick(){
-        AppManager.getAppManager().finishActivity(this);
+        finish();
     }
 
     public void setRightTextMenu(String menu, View.OnClickListener listener){

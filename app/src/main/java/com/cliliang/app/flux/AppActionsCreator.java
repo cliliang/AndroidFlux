@@ -4,7 +4,7 @@ package com.cliliang.app.flux;
 import com.cliliang.app.net.APIClient;
 import com.cliliang.app.net.APIService;
 import com.cliliang.user.actions.LocationAction;
-import com.cliliang.user.model.LocationModel;
+import com.cliliang.user.model.User;
 
 import java.util.Map;
 
@@ -38,22 +38,21 @@ public class AppActionsCreator {
 
     public void getLocation(Map<String, String> map){
         dispatcher.dispatch(new LocationAction(LocationAction.ACTION_REQUEST_START));
-        apiClient.getLocation(map).enqueue(new Callback<LocationModel>() {
+        apiClient.getLocation(map).enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<LocationModel> call, Response<LocationModel> response) {
+            public void onResponse(Call<User> call, Response<User> response) {
                 dispatcher.dispatch(new LocationAction(LocationAction.ACTION_REQUEST_FINISH));
-                LocationModel locationModel = response.body();
-                if (locationModel != null){
-                    dispatcher.dispatch(new LocationAction(LocationAction.ACTION_REQUEST_SUCCESS, locationModel));
+                User user = response.body();
+                if (user != null){
+                    dispatcher.dispatch(new LocationAction(LocationAction.ACTION_REQUEST_SUCCESS, user));
                 }
             }
 
             @Override
-            public void onFailure(Call<LocationModel> call, Throwable t) {
+            public void onFailure(Call<User> call, Throwable t) {
                 dispatcher.dispatch(new LocationAction(LocationAction.ACTION_REQUEST_FINISH));
                 dispatcher.dispatch(new LocationAction(LocationAction.ACTION_REQUEST_ERROR));
             }
         });
     }
-
 }

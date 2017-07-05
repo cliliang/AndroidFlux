@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.cliliang.app.AppContext;
 import com.cliliang.app.flux.AppActionsCreator;
+import com.cliliang.user.model.User;
 
 /**
  * desc:
@@ -20,6 +21,7 @@ public class BaseFragment extends Fragment {
 
     public AppContext appContext;
     public AppActionsCreator appActionsCreator;
+    protected User mUser;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class BaseFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        mUser = appContext.getInfo();
     }
 
     public void setupView(View view){

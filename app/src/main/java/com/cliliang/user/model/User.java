@@ -2,13 +2,17 @@ package com.cliliang.user.model;
 
 import com.cliliang.app.model.BaseModel;
 
+import java.io.Serializable;
+
 /**
  * desc:
  * Created by:chenliliang
  * Created on:2017/7/3.
  */
 
-public class LocationModel extends BaseModel {
+public class User extends BaseModel implements Serializable{
+    public static final long serialVersionUID = 1L;
+
     private float lon;
     private int level;
     private String address;

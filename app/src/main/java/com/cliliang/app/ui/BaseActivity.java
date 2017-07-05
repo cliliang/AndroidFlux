@@ -10,6 +10,7 @@ import android.view.Window;
 import com.cliliang.app.AppContext;
 import com.cliliang.app.flux.AppActionsCreator;
 import com.cliliang.app.flux.Dispatcher;
+import com.cliliang.user.model.User;
 
 import java.lang.ref.WeakReference;
 
@@ -20,6 +21,7 @@ public class BaseActivity extends AppCompatActivity {
     protected AppContext appContext;
     protected Dispatcher dispatcher;
     protected ProgressDialog mProgressDialog;
+    protected User mUser;
 
     protected ProgressDialog showProgress(String title, String message) {
         return showProgress(title, message, -1);
@@ -72,6 +74,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        mUser = appContext.getInfo();
     }
 
     @Override

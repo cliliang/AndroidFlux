@@ -1,7 +1,6 @@
 package com.cliliang.user.ui;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -9,12 +8,11 @@ import com.cliliang.R;
 import com.cliliang.app.flux.Store;
 import com.cliliang.app.ui.BaseToolBarActivity;
 import com.cliliang.user.actions.LocationAction;
-import com.cliliang.user.model.LocationModel;
+import com.cliliang.user.model.User;
 import com.cliliang.user.stores.LocationStore;
 import com.squareup.otto.Subscribe;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -86,7 +84,7 @@ public class RegisterActivity extends BaseToolBarActivity {
                 hideProgress();
                 break;
             case LocationAction.ACTION_REQUEST_SUCCESS:
-                LocationModel model = store.getLocationModel();
+                User model = store.getUser();
                 if (model != null){
                     infoView.setText(model.toString());
                 }

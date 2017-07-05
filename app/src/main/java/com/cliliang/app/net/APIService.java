@@ -1,7 +1,7 @@
 package com.cliliang.app.net;
 
 
-import com.cliliang.user.model.LocationModel;
+import com.cliliang.user.model.User;
 
 import java.util.Map;
 
@@ -19,5 +19,5 @@ public interface APIService {
 
     @FormUrlEncoded
     @POST(APIClient.getLocation)
-    Call<LocationModel> getLocation(@FieldMap Map<String, String> map);
+    Call<User> getLocation(@FieldMap Map<String, String> map);
 }

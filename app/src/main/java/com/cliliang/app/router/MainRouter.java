@@ -24,7 +24,7 @@ public class MainRouter {
     private static MainRouter singleton = null;
     private Context context;
 
-    public MainRouter(Context context) {
+    private MainRouter(Context context) {
         this.context = context;
     }
 

@@ -11,6 +11,7 @@ import com.cliliang.R;
 import com.cliliang.app.module.ModuleID;
 import com.cliliang.app.router.MainRouter;
 import com.cliliang.app.ui.BaseFragment;
+import com.cliliang.common.utils.UIHelper;
 import com.cliliang.user.router.UserUI;
 
 /**
@@ -42,5 +43,14 @@ public class MainSquareFragment extends BaseFragment {
                 MainRouter.getInstance(getActivity()).showActivity(ModuleID.USER_MODULE_ID, UserUI.LoginActivity);
             }
         });
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mUser != null){
+            UIHelper.ToastMessage(String.valueOf(mUser.getLat()));
+        }
     }
 }

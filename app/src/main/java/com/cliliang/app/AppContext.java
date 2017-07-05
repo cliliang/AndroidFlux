@@ -1,12 +1,13 @@
 package com.cliliang.app;
 
 import android.app.Application;
-import android.util.Log;
 
+import com.cliliang.app.config.AppConfig;
 import com.cliliang.app.module.BaseModule;
 import com.cliliang.app.ui.CrashHandler;
 import com.cliliang.home.HomeModule;
 import com.cliliang.user.UserModule;
+import com.cliliang.user.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ import java.util.List;
 public class AppContext extends Application {
     private List<BaseModule> mods = new ArrayList<>();
     private static AppContext instance;
+    private User info;
     public static AppContext getInstance(){
         return instance;
     }
@@ -45,5 +47,17 @@ public class AppContext extends Application {
     public List<BaseModule> getMods() {
         fillMods();
         return mods;
+    }
+
+    private void getUserInfo(){
+        this.info = AppConfig.getInstance().getUserInfo();
+    }
+
+    public User getInfo(){
+        return info;
+    }
+
+    public void setUserInfo(User user){
+        this.info = user;
     }
 }

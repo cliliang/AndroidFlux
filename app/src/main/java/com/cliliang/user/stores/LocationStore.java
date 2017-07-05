@@ -1,9 +1,11 @@
 package com.cliliang.user.stores;
 
+import com.cliliang.app.AppContext;
+import com.cliliang.app.config.AppConfig;
 import com.cliliang.app.flux.Action;
 import com.cliliang.app.flux.Store;
 import com.cliliang.user.actions.LocationAction;
-import com.cliliang.user.model.LocationModel;
+import com.cliliang.user.model.User;
 
 /**
  * desc:
@@ -12,7 +14,7 @@ import com.cliliang.user.model.LocationModel;
  */
 
 public class LocationStore extends Store {
-    private LocationModel locationModel = null;
+    private User user = null;
 
     private static LocationStore instance;
     private LocationStore(){}
@@ -23,8 +25,8 @@ public class LocationStore extends Store {
         return instance;
     }
 
-    public LocationModel getLocationModel(){
-        return locationModel;
+    public User getUser(){
+        return user;
     }
     @Override
     public void onAction(Action action) {
@@ -36,9 +38,11 @@ public class LocationStore extends Store {
                 emitStoreChange(type);
                 break;
             case LocationAction.ACTION_REQUEST_SUCCESS:
-                LocationModel model = (LocationModel) action.getData();
+                User model = (User) action.getData();
                 if (model != null){
-                    this.locationModel = model;
+                    this.user = model;
+                    AppConfig.getInstance().saveUserData(model);
+                    AppContext.getInstance().setUserInfo(model);
                     emitStoreChange(type);
                 }
                 break;
